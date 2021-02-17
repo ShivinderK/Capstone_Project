@@ -17,15 +17,25 @@ Added features will always demand extra components. This is the list of all the 
 8. IR Sensor: To detect any obstacle when the garage door is closing.
 9. Buzzer: To alert the user in case an obstacle is detected or the garage door remains open for more than set time.
 10. Push Button: To acknowledge the Buzzor.
-11. GSM Module: To notify the user about the door opening and closing.
-12.Keypad Matrix: To enter password for garage opening and enable garage closing via a key.
-13.LCD Display: To display user entered password via special character and to display messages to user.
-14.Power Adapter: To provide supply to Beaglebone black.
-15.16GB Sd Card: To flash latest image of debian.
-16.LED Light assorted kit: To notify open/close status of the garage door.
-17.PCB Board: To solder all the components together
-18.Resistors: To limit the flow of current or divide voltage through the circuit.
-19.Spark Fun Beginners kit: For using various capacitors, diodes and other components we may need in the project.  
-20.Silicon Hookup wires: To connect sensors, buzzer and other components to the main unit.
+11. 
+12. GSM Module: To notify the user about the door opening and closing.
+13. 
+14.Keypad Matrix: To enter password for garage opening and enable garage closing via a key.
+15.
+16.LCD Display: To display user entered password via special character and to display messages to user.
+17.
+18.Power Adapter: To provide supply to Beaglebone black.
+19.
+20.16GB Sd Card: To flash latest image of debian.
+21.
+22.LED Light assorted kit: To notify open/close status of the garage door.
+23.
+24.PCB Board: To solder all the components together
+25.
+26.Resistors: To limit the flow of current or divide voltage through the circuit.
+27.
+28.Spark Fun Beginners kit: For using various capacitors, diodes and other components we may need in the project.  
+29.
+30.Silicon Hookup wires: To connect sensors, buzzer and other components to the main unit.
 
 
