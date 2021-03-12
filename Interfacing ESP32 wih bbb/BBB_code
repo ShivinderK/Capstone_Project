@@ -1,0 +1,46 @@
+#include <iobb.h>
+#include <stdio.h>
+
+#define GreenLED 8,16
+#define RedLED 8,15
+#define Gon 8,11
+#define Ron 8,12
+
+int main(void)
+{
+	iolib_init();
+	iolib_setdir(GreenLED,DigitalIn);
+	iolib_setdir(RedLED,DigitalIn);
+	iolib_setdir(Gon,DigitalOut);
+	iolib_setdir(Ron,DigitalOut);
+	//iolib_delay_ms(500);
+	while(1)
+	{
+		if (is_high(GreenLED))
+		{
+			printf("Green LED is ON \n");
+			pin_high(Gon);
+			iolib_delay_ms(500);
+		}
+		else (is_low(GreenLED))
+		{
+			printf("Green LED is OFF\n");
+			pin_low(Gon);
+			iolib_delay_ms(500);
+		}
+		if (is_high(RedLED))
+		{
+			printf("Red LED is ON \n");
+			pin_high(Ron);
+			iolib_delay_ms(500);
+		}
+		else (is_low(RedLED))
+		{
+			printf("Red LED is OFF \n");
+			pin_low(Ron);
+			iolib_delay_ms(500);
+		}
+}
+	iolib_free();
+	return(0);
+}
