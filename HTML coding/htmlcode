@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Door Security</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+
+body {background-color: powderblue;}
+h1{color: Dodgerblue; font-family: verdana;
+  font-size: 300%;
+text-align: center;}
+
+table, th, td {
+  border: 1px solid black;
+}
+
+table.center {
+  margin-left: auto; 
+  margin-right: auto;
+}
+.button {
+  background-color: #4CAF50; 
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+.button1 {
+  background-color: #e01f09; 
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+.button2 {
+  background-color: #098072; 
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
+.hero-image {
+  background-image: url("door.jpg");
+  background-color: #cccccc;
+  height: 400px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+}
+
+.hero-text {
+  text-align: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+}
+
+</style>
+</head>
+<body>
+<div class="hero-image">
+  <div class="hero-text">
+<h1>Welcome to Garage Door Montioring System</h1>
+</div>
+</div>
+<p><hr></p>
+<table class="center">
+  <tr>
+    <td><h3 style="color:black;">Garage Status</h3></td>
+    <td>Occupied</td>
+  </tr>
+  <tr>
+    <td>Door is Open</td>
+    <td><button class="button button1">CLOSE</button></td>
+  </tr>
+</table>
+<p><hr></p>
+<button class="button button2">REFRESH</button>
+
+</body>
+</html>
