@@ -1,0 +1,37 @@
+#include <stdio.h>           // includes standard I/O header files
+#include <iobb.h>            //includes GPIO I/O header files
+#include <unistd.h>           //includes POSIX API library for adding delay in operation
+#define Right 8,17              //pin 17 of header 8 (IN1) - connected to DC Motor terminal
+#define Left 8,18               //pin 18 of header 8 (IN2) - Connected to Dc Motor terminal 
+#define IRbtwnDoor 8,7               //pin 7 of header 8- defining the digital Input pin of IR sensor
+int main(void)             // main function
+{
+     iolib_init();                                  // initializing GPIO I/O library
+     iolib_setdir(IRbtwnDoor, DigitalIn);           //setting GPIO pin of IR sensor for input
+     iolib_setdir(Right, DigitalOut);               //setting GPIO pin of IN1 of relay module as output
+     iolib_setdir(Left, DigitalOut);                //setting GPIO pin of IN2 of relay module as output
+while(1)                                //continuous loop- means it will repeatedly execute the target statement until the condition is true
+  {
+    if (is_high(IRbtwnDoor))                  //if pin 8 of header is low
+    {
+      printf("Motor Start \n");              //print on terminal
+       pin_high(Right);                     //in1 pin of relay motor is high
+       pin_low(Left);                        //in2 pin of relay motor is low
+      usleep(1200000);                     //delay operation
+    }
+
+    if (is_low(IRbtwnDoor))             // if pin 8 of header is high
+    {
+      printf("Motor Stop \n");                //print on terminal
+      pin_low(Right);                         //in1 pin of relay motor is low
+      pin_low(Left);                          //in2 pin of relay motor is low
+      usleep(1200000);                  //delay operation
+ }
+  }
+}
+  }
+  
+iolib_free();   //end of program (freed library resources)
+return(0);   //return a value
+
+}
