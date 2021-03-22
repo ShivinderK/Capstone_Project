@@ -1,0 +1,47 @@
+#include <iobb.h>    //includes GPIO I/O header files
+#include <stdio.h> //includes standard I/O header files
+#include <unistd.h>  //includes POSIX API library for adding delay in operations
+
+#define GreenLED 8,16 //Green led connected to pin 16 of header P8
+#define RedLED 8,15  //Red led connected to pin 15 of header P8
+
+#define LMcheckDoorOpened 9,30 //Limit switch for door open connected to pin 30 of header 9
+#define LMcheckDoorClosed 9,12 //Limit switch for door close connected to pin 12 of header 9 
+
+
+int main(void)        // main function
+{
+  iolib_init();     // initializing GPIO I/O library
+  iolib_setdir(GreenLED, DigitalOut); //setting GPIO pin for Output
+  iolib_setdir(RedLED, DigitalOut);
+
+  iolib_setdir(LMcheckDoorOpened, DigitalIn);  //setting GPIO pin for Input
+  iolib_setdir(LMcheckDoorClosed, DigitalIn);
+
+
+  while(1)  //continuous loop
+  {
+    if (is_low(LMcheckDoorOpened))  //if pin 30  of header is low 
+    {
+      printf("Door is open \n");  //print on terminal
+      pin_high(RedLED);  //Red LED will glow
+      usleep(1200000);  //delay operation
+    }
+   else if (is_high(LMcheckDoorOpened)) //if pin 30 of header is high
+    {
+        pin_low(RedLED); //Red LED will not glow
+ }
+    if (is_low(LMcheckDoorClosed))  // if pin 12 of header is low
+    {
+      printf("Door is Closed \n");
+      pin_high(GreenLED);  //LED will glow
+      usleep(1200000);
+    }
+   else if (is_high(LMcheckDoorClosed)) //if pin 12 of header is high
+    {
+      pin_low(GreenLED);  // LED will not glow
+    }
+  }
+iolib_free();   //end of program (freed library resources)
+return(0);   //return a value
+}
