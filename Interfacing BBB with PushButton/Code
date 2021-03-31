@@ -1,0 +1,43 @@
+#include <stdio.h>   //includes standard I/O header files
+#include <iobb.h>     //includes GPIO I/O header files
+#include <unistd.h>  //includes POSIX API library for adding delay in operation
+
+#define GreenLED 8,12     //pin 12 of header 8
+#define PushButton 9,41   //pin 41 of header 9
+#define IRbtwnDoor 8,7    //pin 7 of header 8
+
+int main(void)        // main function
+{
+  iolib_init();     // initializing GPIO I/O library
+  iolib_setdir(IRbtwnDoor, DigitalIn);   //setting GPIO pin of IR sensor for input
+ iolib_setdir(GreenLED, DigitalOut);  //setting GPIO pin of LED 
+ iolib_setdir(PushButton, DigitalIn);    //setting GPIO pin of push button for input
+
+while(1)     //continuous loop
+{
+    if (is_high (IRbtwnDoor))      //if pin 7 of header 8 is low
+       {
+            printf(“Door Closed \n”);     //print on terminal
+            pin_low(GreenLED);       // LED will not glow
+
+          usleep (1200000);             //delay operation
+}
+   if (is_low (IRbtwnDoor))      //if pin 7 of header 8 is high
+       {
+            printf(“Obstacle \n”);     //print on terminal
+            pin_high(GreenLED);       // LED will glow
+
+          usleep (1200000);             //delay operation
+
+   if (is_high (PushButton))      //when button is pressed
+       {
+            printf(“Buzzer is off \n”);     //print on terminal
+            pin_low(GreenLED);       // LED will not glow
+
+          usleep (1200000);             //delay operation
+}
+}
+}
+iolib_free();     //end of program (free library resources)
+return(0);         //return a value
+}
