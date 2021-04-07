@@ -1,0 +1,56 @@
+#include <iobb.h>             //include BBB GPIO Pin header file
+#include <stdio.h>           //include I/O header file 
+
+#define Right 8,17            //right pin of motor connected to P8.17
+#define Left 8,18             //left pin of motor connected to P8.18
+#define DoorStatus2ESP 8,10     //Garage door status pin P8.10
+#define DoorOpen4mESP 8,14      //Garage door open pin P8.14
+#define DoorClose4mESP 8,11      //Garage door close pin P8.11
+
+void CloseDoor()            //function for closing door
+{
+        pin_high(Left);
+        pin_low(Right);
+        pin_low(DoorStatus2ESP);
+}
+
+void OpenDoor()           //function for opening door
+{
+        pin_high(Right);
+        pin_low(Left);
+        pin_high(DoorStatus2ESP);
+}
+
+int
+main(void)    //main function
+{
+  iolib_init();       //initializing iobb library files
+  iolib_setdir(Right, DigitalOut);
+  iolib_setdir(Left, DigitalOut);
+  iolib_setdir(DoorStatus2ESP, DigitalOut);
+  iolib_setdir(DoorOpen4mESP, DigitalIn);
+  iolib_setdir(DoorClose4mESP, DigitalIn);
+
+iolib_delay_ms(500);
+CloseDoor();            
+
+while(1)   //for continous loop
+{
+
+if(is_high(DoorOpen4mESP))      // if door open from html page pin is high door will open 
+{
+        OpenDoor();
+        printf("Door is open \n");
+        iolib_delay_ms(999);
+}
+else if(is_high(DoorClose4mESP))      // if door close from htmp page pin is high door will close
+{
+        CloseDoor();
+        printf("Door is Close \n");
+        iolib_delay_ms(999);
+}
+
+}
+iolib_free();  // free iobb libraries
+return(0); 
+}
