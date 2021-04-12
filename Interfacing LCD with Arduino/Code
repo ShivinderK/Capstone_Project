@@ -1,19 +1,20 @@
-#include <LiquidCrystal_I2C.h>
-#include <LCD03.h>
-#include "Wire.h" // For I2C
-LiquidCrystal_I2C lcd(0x27,20, 4); // 0x27 is the default I2C bus address of the backpack-see article
-void setup()
+#include <LiquidCrystal_I2C.h> // Including libraries for the lcd_i2c
+#include <LCD03.h> // Including libraries for lcd module
+#include "Wire.h" // including libraries for I2C module
+LiquidCrystal_I2C lcd(0x27,20, 4); // 0x27 is the default I2C bus address of the backpack
+void setup() // function created to run the code as soon as the arduino is powered up
 {
-   // Set off LCD module
+ 
    lcd.init();   // LCD initialization
-   lcd.begin (20,4); // 20 x 4 LCD module
+   lcd.begin (20,4); // Defining pins of 20 x 4 LCD module
    lcd.setBacklight(HIGH);   // to set the backlight
-   lcd.print("Good Day!!");   // print on LCD screen
-   lcd.setCursor(0,1);      // to move to the next line
-   lcd.print("Enter your password:");   // print on LCD screen
+   lcd.print("Good Day!!");   // this command will print the mentioned text on LCD screen
+   lcd.setCursor(0,1);      // to move to the next line; beacuse lcd has 20 rows and 4 column
+   lcd.print("Enter your password:");   // this command will print the mentioned text on LCD screen
 
 }
-void loop ()
+void loop () // the loop function does precisely what its name suggests and loops consecutively allowing your program to change and respond. We use to actively control the arduino board.
+
 {
   
 }
