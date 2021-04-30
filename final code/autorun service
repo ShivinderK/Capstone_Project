@@ -1,0 +1,17 @@
+Find the location of object file of Garagedoor using command pwd
+I get location as home/debian/GarageDoor
+Run command - sudo nano /lib/systemd/system/autostart.service
+Add this to nano terminal --scripted file for autorun
+[Unit]
+Description=Service File to start the GarageDoor File
+After=syslog.target network.target
+[Service]
+Type=simple
+ExecStart=/home/debian/GarageDoor
+[Install]
+WantedBy=user.target
+
+Ctrl+o   enter ctrl+X
+
+Run command- sudo systemctl enable autostart.service
+Sudo reboot
