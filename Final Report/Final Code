@@ -1,0 +1,119 @@
+#include <iobb.h>
+#define GreenLED 8,16
+#define RedLED 8,15
+#define Right 8,17
+#define Left 8,18
+#define DoorStatus2ESP 8,10
+#define GarageStatus2ESP 8,9
+#define DoorOpen4mESP 8,14
+#define DoorClose4mESP 8,11
+#define IRbtwnDoor 8,7
+#define IRoccupancy 8,8
+#define LMcheckDoorOpened 9,30
+#define LMcheckDoorClosed 9,12
+#define DoorOpen4mArduino 9,25
+#define DoorClose4mArduino 9,27
+#define Buzzer 9,23
+#define PushButton 9,41
+
+void CloseDoor()
+{
+        pin_high(Left);
+        pin_low(Right);
+        while(is_high(LMcheckDoorClosed))
+        {
+          if(!is_high(IRbtwnDoor))
+          {
+                  pin_low(Left);
+                  pin_low(Right);
+                  pin_high(Buzzer);
+          }
+          else
+          {
+                 pin_high(Left);
+                 pin_low(Right);
+          }
+
+          if(is_low(PushButton))pin_low(Buzzer);
+        }
+        pin_low(Left);
+        pin_low(Right);
+        pin_high(GreenLED);
+        pin_low(RedLED);
+        pin_low(Buzzer);
+        pin_low(DoorStatus2ESP);
+}
+void OpenDoor()
+{
+        pin_high(Right);
+        pin_low(Left);
+        pin_high(Buzzer);
+        while(is_high(LMcheckDoorOpened))
+        {
+          if(!is_high(IRbtwnDoor))
+          {
+                  pin_low(Left);
+                  pin_low(Right);
+                  pin_high(Buzzer);
+          }
+          else
+          {
+                 pin_high(Right);
+                 pin_low(Left);
+          }
+
+          if(is_low(PushButton))pin_low(Buzzer);
+
+        }
+
+  pin_low(Right);
+        pin_low(Left);
+        pin_high(RedLED);
+        pin_low(GreenLED);
+        pin_low(Buzzer);
+        pin_high(DoorStatus2ESP);
+}
+
+int
+main(void)
+{
+
+ iolib_init();
+  iolib_setdir(GreenLED, DigitalOut);
+  iolib_setdir(RedLED, DigitalOut);
+  iolib_setdir(Right, DigitalOut);
+  iolib_setdir(Left, DigitalOut);
+  iolib_setdir(DoorStatus2ESP, DigitalOut);
+  iolib_setdir(GarageStatus2ESP, DigitalOut);
+  iolib_setdir(Buzzer, DigitalOut);
+  iolib_setdir(DoorOpen4mESP, DigitalIn);
+  iolib_setdir(DoorClose4mESP, DigitalIn);
+  iolib_setdir(IRbtwnDoor, DigitalIn);
+  iolib_setdir(IRoccupancy, DigitalIn);
+  iolib_setdir(LMcheckDoorOpened, DigitalIn);
+  iolib_setdir(LMcheckDoorClosed, DigitalIn);
+  iolib_setdir(DoorOpen4mArduino, DigitalIn);
+  iolib_setdir(DoorClose4mArduino, DigitalIn);
+  iolib_setdir(PushButton, DigitalIn);
+iolib_delay_ms(500);
+//CloseDoor();
+
+while(1)
+{
+
+if(is_high(DoorOpen4mArduino) || is_high(DoorOpen4mESP))
+{
+        OpenDoor();
+}
+else if(is_high(DoorClose4mArduino) || is_high(DoorClose4mESP))
+{
+        CloseDoor();
+}
+
+if(is_low(IRoccupancy)) pin_high(GarageStatus2ESP);
+else pin_low(GarageStatus2ESP);
+
+}
+iolib_free();
+return(0);
+}
